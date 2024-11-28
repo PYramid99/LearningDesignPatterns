@@ -5,8 +5,33 @@ project(LearningDesignPatterns CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED 17)
 
-set(HEADER_DIR "include")
-set(SOURCE_DIR "src")
+set(HEADER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
+set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
+
+function(group_header_files_by_directory BASE_DIR)
+    file(GLOB_RECURSE ALL_FILES "${BASE_DIR}/*.h")
+    foreach(FILE_PATH ${ALL_FILES})
+        file(RELATIVE_PATH REL_PATH "${BASE_DIR}" "${FILE_PATH}")
+        get_filename_component(FILE_NAME "${REL_PATH}" NAME)
+        get_filename_component(FILE_DIR "${REL_PATH}" DIRECTORY)
+        string(REPLACE "/" "\\" GROUP_NAME "${FILE_DIR}")
+        source_group("Header Files/${GROUP_NAME}" FILES "${FILE_PATH}")
+    endforeach()
+endfunction()
+
+function(group_source_files_by_directory BASE_DIR)
+    file(GLOB_RECURSE ALL_FILES "${BASE_DIR}/*.cpp")
+    foreach(FILE_PATH ${ALL_FILES})
+        file(RELATIVE_PATH REL_PATH "${BASE_DIR}" "${FILE_PATH}")
+        get_filename_component(FILE_NAME "${REL_PATH}" NAME)
+        get_filename_component(FILE_DIR "${REL_PATH}" DIRECTORY)
+        string(REPLACE "/" "\\" GROUP_NAME "${FILE_DIR}")
+        source_group("Source Files/${GROUP_NAME}" FILES "${FILE_PATH}")
+    endforeach()
+endfunction()
+
+group_header_files_by_directory("${HEADER_DIR}")
+group_source_files_by_directory("${SOURCE_DIR}")
 
 # Double Buffer
 
