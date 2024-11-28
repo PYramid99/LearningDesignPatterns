@@ -33,6 +33,13 @@ endfunction()
 group_header_files_by_directory("${HEADER_DIR}")
 group_source_files_by_directory("${SOURCE_DIR}")
 
+# Command Pattern
+
+file(GLOB_RECURSE COMMAND_PATTERN_HEADERS "${HEADER_DIR}/CommandPattern/*.h")
+file(GLOB_RECURSE COMMAND_PATTERN_SOURCES "${SOURCE_DIR}/CommandPattern/*.cpp")
+add_executable(CommandPattern "test/TestCommandPattern.cpp" "${COMMAND_PATTERN_SOURCES}" "${COMMAND_PATTERN_HEADERS}")
+target_include_directories(CommandPattern PUBLIC "${HEADER_DIR}")
+
 # Double Buffer
 
 file(GLOB_RECURSE DOUBLE_BUFFER_HEADERS "${HEADER_DIR}/DoubleBuffer/*.h")
