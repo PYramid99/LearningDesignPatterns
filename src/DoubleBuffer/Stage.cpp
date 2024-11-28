@@ -10,7 +10,11 @@ void Stage::update()
 	for (auto& actor : mActorList)
 	{
 		actor->update();
-		actor->reset();
+	}
+
+	for (auto& actor : mActorList)
+	{
+		actor->swap();
 	}
 }
 void Stage::add_actor(const std::shared_ptr<Actor>& actor)
@@ -20,6 +24,10 @@ void Stage::add_actor(const std::shared_ptr<Actor>& actor)
 
 void Stage::clean()
 {
+	for (auto& actor : mActorList)
+	{
+		actor->clean();
+	}
 	mActorList.clear();
 }
 }

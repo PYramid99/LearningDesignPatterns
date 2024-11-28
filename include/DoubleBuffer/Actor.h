@@ -13,16 +13,19 @@ public:
 
 	virtual void update() = 0;
 
-	void reset();
+	void swap();
 
 	void slap();
 
 	bool was_slapped();
 
+	void clean();
+
 	std::string get_name();
 
 protected:
 	std::string mName;
-	bool mSlapped{ false };
+	bool mCurrSlapped{ false };
+	bool mNextSlapped{ false };
 };
 }

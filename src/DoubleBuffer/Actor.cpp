@@ -2,20 +2,28 @@
 
 namespace double_buffer
 {
-void Actor::reset()
+void Actor::swap()
 {
-	mSlapped = false;
+	mCurrSlapped = mNextSlapped;
+	mNextSlapped = false;
 }
 
 void Actor::slap()
 {
-	mSlapped = true;
+	mNextSlapped = true;
 }
 
 bool Actor::was_slapped()
 {
-	return mSlapped;
+	return mCurrSlapped;
 }
+
+void Actor::clean()
+{
+	mCurrSlapped = false;
+	mNextSlapped = false;
+}
+
 std::string Actor::get_name()
 {
 	return mName;
