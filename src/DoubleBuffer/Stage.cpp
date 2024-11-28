@@ -12,11 +12,9 @@ void Stage::update()
 		actor->update();
 	}
 
-	for (auto& actor : mActorList)
-	{
-		actor->swap();
-	}
+	Actor::swap();
 }
+
 void Stage::add_actor(const std::shared_ptr<Actor>& actor)
 {
 	mActorList.push_back(actor);

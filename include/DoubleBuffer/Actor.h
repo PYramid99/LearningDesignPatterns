@@ -1,31 +1,38 @@
 #pragma once
 
 #include <string>
+#include <array>
 
 namespace double_buffer
 {
 class Actor
 {
 public:
-	Actor(const std::string& name = "Actor") : mName(name) {}
+	Actor(const std::string& name = "Actor");
 
 	virtual ~Actor() = default;
 
 	virtual void update() = 0;
 
-	void swap();
-
 	void slap();
 
 	bool was_slapped();
+
+	void clear();
 
 	void clean();
 
 	std::string get_name();
 
-protected:
+	static int next();
+
+	static void swap();
+
+private:
 	std::string mName;
-	bool mCurrSlapped{ false };
-	bool mNextSlapped{ false };
+
+	std::array<bool, 2> mSlapped{ false, false };
+
+	static int sCurrent;
 };
 }
